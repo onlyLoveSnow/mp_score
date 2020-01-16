@@ -1,0 +1,21 @@
+/* pages/grade/grade.wxss */
+
+page {
+  background-color: #fff;
+}
+
+.section {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  padding-top: 40rpx;
+}
+
+.grade-box {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  flex-direction: column;
+  margin: 30rpx 150rpx 30rpx 150rpx;
+}

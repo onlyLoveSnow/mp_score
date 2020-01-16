@@ -1,0 +1,45 @@
+<!--pages/grade/grade.wxml-->
+<view class="page">
+  <view class="page__bd">
+    <view class="section">
+      <picker bindchange="sectionSemester" value="{{index}}" range="{{semester}}">
+        <view class="picker">
+          {{semester[index]}}
+        </view>
+      </picker>
+    </view>
+    <view class="weui-loadmore weui-loadmore_line">
+      <view class="weui-loadmore__tips weui-loadmore__tips_in-line">成绩</view>
+    </view>
+  </view>
+  <view>
+    <view class="weui-cells__title">{{stu_info}}</view>
+    <view class="weui-cells weui-cells_after-title" wx:for="{{resArray}}" wx:key>
+
+       <!-- wx:if="{{item.zcj >= 60}}" -->
+       <view wx:if="{{item.kcmc == '毛泽东思想和中国特色社会主义理论体系概论'}}" class="weui-cell weui-cell_access">
+        <view class="weui-cell__bd">毛概</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access" style="font-size: 0">
+          <view style="display: inline-block; vertical-align:middle; font-size: 17px;">{{item.zcj}}</view>
+        </view>
+      </view>
+
+      <view wx:elif="{{item.zcj < 60}}" class="weui-cell weui-cell_access" style="color: red;">
+        <view class="weui-cell__bd">{{item.kcmc}}</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access" style="font-size: 0">
+          <view style="display: inline-block; vertical-align:middle; font-size: 17px; color: red;">{{item.zcj}}</view>
+        </view>
+      </view>
+
+      
+
+      <view wx:else class="weui-cell weui-cell_access">
+        <view class="weui-cell__bd">{{item.kcmc}}</view>
+        <view class="weui-cell__ft weui-cell__ft_in-access" style="font-size: 0">
+          <view style="display: inline-block;vertical-align:middle; font-size: 17px;">{{item.zcj}}</view>
+        </view>
+      </view>
+
+    </view>
+  </view>
+</view>
