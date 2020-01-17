@@ -19,12 +19,32 @@
     </view>
     <view class="weui-msg__extra-area">
       <view class="weui-footer__links">
-        <navigator bindtap="" class="weui-footer__link">底部链接文本</navigator>
+        <navigator bindtap="showTel" class="weui-footer__link">联系方式</navigator>
       </view>
       <view class="weui-footer">
         <view class="weui-footer__text">信息工程学院 17级物联网工程1班黎伟航</view>
         <view class="weui-footer__text">版权所有</view>
         <view class="weui-footer__text">Copyright © 2020 lwh.kim. All Rights Reserved.</view>
+      </view>
+    </view>
+  </view>
+  <view class="weui-demo-dialog {{showDialog ? 'weui-demo-dialog_show' : ''}}">
+    <view class="weui-mask" bindtap="closeDialog"></view>
+    <view class="weui-dialog__wrp" bindtap="closeDialog">
+      <view class="weui-dialog">
+        <view class="weui-dialog__hd">
+          <view class="weui-dialog__title">联系方式</view>
+        </view>
+        <view class="weui-dialog__bd">
+
+          <view>作者：一叶相思</view>
+          <view>QQ:1094464365</view>
+
+
+        </view>
+        <view class="weui-dialog__ft">
+          <view class="weui-dialog__btn" bindtap="closeDialog">确定</view>
+        </view>
       </view>
     </view>
   </view>
