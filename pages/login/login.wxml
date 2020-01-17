@@ -35,7 +35,7 @@
   <view class="weui-form__extra-area page__fd">
     <view class="weui-footer">
       <view class="weui-footer__links">
-        <navigator bindtap="linkShow" class="weui-footer__link">联系我们</navigator>
+        <navigator bindtap="about_msg" class="weui-footer__link">联系我们</navigator>
       </view>
       <view class="weui-footer__text">Copyright © 2020 lwh.kim. All Rights Reserved.</view>
     </view>

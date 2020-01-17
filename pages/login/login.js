@@ -62,7 +62,6 @@ Page({
                 })
               }
             })
-            return;
           } else {
             // 获取token和保存本地缓存
             wx.setStorage({
@@ -95,11 +94,9 @@ Page({
     }
   },
 
-  linkShow() {
-    wx.showModal({
-      title: '提示',
-      content: '并没有这些功能，先别乱点',
-      showCancel: false
+  about_msg() {
+    wx.navigateTo({
+      url: '../about_msg/about_msg',
     })
   },
 

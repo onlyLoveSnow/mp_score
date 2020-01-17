@@ -1,7 +1,8 @@
 {
   "pages": [
     "pages/login/login",
-    "pages/grade/grade"
+    "pages/grade/grade",
+    "pages/about_msg/about_msg"
   ],
   "window": {
     "backgroundTextStyle": "light",

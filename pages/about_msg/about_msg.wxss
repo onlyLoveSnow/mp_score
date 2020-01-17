@@ -1,0 +1,14 @@
+/* pages/about_msg/about_msg.wxss */
+
+page {
+  background-color: #fff;
+}
+
+page, .page {
+  height: 100%;
+}
+
+.image-box {
+  margin: 0 100px 0 100px 0;
+  /* height: 100px; */
+}
