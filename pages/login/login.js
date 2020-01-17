@@ -26,59 +26,73 @@ Page({
 
   // 登录
   login: function() {
-    console.log("学号:" + this.data.xh)
-    console.log("密码:" + this.data.pwd)
-    var _this = this
-    this.setData({
-      getUrl: 'http://jw.nnxy.cn/app.do?method=authUser&xh=' + this.data.xh + '&pwd=' + this.data.pwd
-    })
-
-    // 网络请求
-    wx.request({
-      url: this.data.getUrl, // 向南宁学院教务系统请求token
-      success(res) {
-        if (-1 == res.data.token) {
-          wx.showModal({
-            title: '提示',
-            content: '登录失败，请检查学号和密码',
-            showCancel: false,
-            success(res) {
-              _this.setData({
-                xh: '',
-                pwd: ''
-              })
-            }
-          })
-          return;
-        } else {
-          // 获取token和保存本地缓存
-          wx.setStorage({
-            key: "token",
-            data: res.data.token
-          })
-          // 保存学号到本地缓存
-          wx.setStorage({
-            key: "xh",
-            data: _this.data.xh
-          })
-          // 保存学生信息到本地缓存
-          wx.setStorage({
-            key: 'stu_info',
-            data: res.data.user.userdwmc + ' ' + res.data.user.username,
-          })
-
-          // 提示及跳转
-          wx.redirectTo({
-            url: '../grade/grade',
-          })
-          wx.showToast({
-            title: '登录成功',
-            icon: 'success',
-            duration: 2000
-          })
-        }
+    if (this.data.xh == '' || this.data.pwd == '') {
+      if (this.data.xh == '') {
+        wx.showModal({
+          title: '提示',
+          content: '请输入学号',
+          showCancel: false
+        })
+      } else if (this.data.pwd == '') {
+        wx.showModal({
+          title: '提示',
+          content: '请输入密码',
+          showCancel: false
+        })
       }
-    })
+    } else {
+
+      var _this = this
+      this.setData({
+        getUrl: 'http://jw.nnxy.cn/app.do?method=authUser&xh=' + this.data.xh + '&pwd=' + this.data.pwd
+      })
+
+      // 网络请求
+      wx.request({
+        url: this.data.getUrl, // 向南宁学院教务系统请求token
+        success(res) {
+          if (-1 == res.data.token) {
+            wx.showModal({
+              title: '提示',
+              content: '登录失败，请检查学号和密码',
+              showCancel: false,
+              success(res) {
+                _this.setData({
+                  pwd: ''
+                })
+              }
+            })
+            return;
+          } else {
+            // 获取token和保存本地缓存
+            wx.setStorage({
+              key: "token",
+              data: res.data.token
+            })
+            // 保存学号到本地缓存
+            wx.setStorage({
+              key: "xh",
+              data: _this.data.xh
+            })
+            // 保存学生信息到本地缓存
+            wx.setStorage({
+              key: 'stu_info',
+              data: res.data.user.userdwmc + ' ' + res.data.user.username,
+            })
+
+            // 提示及跳转
+            wx.redirectTo({
+              url: '../grade/grade',
+            })
+            wx.showToast({
+              title: '登录成功',
+              icon: 'success',
+              duration: 2000
+            })
+          }
+        }
+      })
+    }
   },
 
   linkShow() {
