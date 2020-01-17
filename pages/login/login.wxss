@@ -1,4 +1,4 @@
 /* pages/login/login.wxss */
-page, .page {
-  height: 100%;
+page {
+  background-color: #fff;
 }

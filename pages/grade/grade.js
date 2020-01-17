@@ -11,9 +11,8 @@ Page({
     stu_info: '',// 学生信息
     resArray: [], // 请求到的成绩信息
 
-    semester: ['2019-2020-1', '2018-2019-2', '2018-2019-1', '2017-2018-2', '2017-2018-1'],
-    index: 0,
-
+    semester: ['2019-2020-1', '2018-2019-2', '2018-2019-1', '2017-2018-2', '2017-2018-1'],  // 学期信息
+    index: 0
   },
 
   // 选择学期
@@ -33,11 +32,9 @@ Page({
       url: _this.data.getUrl, // 获取成绩请求
       method: 'get',
       header: {
-        'content-type': 'application/json', // 默认值
         'token': _this.data.token // 登录令牌
       },
       success(res) {
-        console.log(res.data.result)
         _this.setData({
           resArray: res.data.result
         })
@@ -74,11 +71,9 @@ Page({
     wx.request({
       url: _this.data.getUrl, // 获取成绩请求
       header: {
-        'content-type': 'application/json', // 默认值
         'token': _this.data.token // 登录令牌
       },
       success(res) {
-        console.log(res.data.result)
         _this.setData({
           resArray: res.data.result
         })

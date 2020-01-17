@@ -1,51 +1,43 @@
 <!--pages/login/login.wxml-->
 <view class="page">
-  <view class="weui-form">
+  <view class="page__hd">
     <view class="weui-form__text-area">
       <view class="weui-form__title">南宁学院成绩查询</view>
       <view class="weui-form__desc">输入学号密码</view>
     </view>
-    <view class="weui-form__control-area">
-      <view class="weui-cells__group weui-cells__group_form">
-        <view class="weui-cells__title">输入框</view>
-        <view class="weui-cells weui-cells_form">
-          <view class="weui-cell">
-            <view class="weui-cell__hd">
-              <label class="weui-label">学号</label>
-            </view>
-            <view class="weui-cell__bd">
-              <input class="weui-input" type="number" value="{{xh}}" bindinput="xhinput" pattern="[0-9]*" placeholder="请输入学号" />
-            </view>
+  </view>
+  <view class="weui-form__control-area">
+    <view class="weui-cells__group weui-cells__group_form">
+      <view class="weui-cells__title">输入框</view>
+      <view class="weui-cells weui-cells_form">
+        <view class="weui-cell">
+          <view class="weui-cell__hd">
+            <label class="weui-label">学号</label>
           </view>
-          <view class="weui-cell">
-            <view class="weui-cell__hd">
-              <label class="weui-label">密码</label>
-            </view>
-            <view class="weui-cell__bd">
-              <input class="weui-input" password type="text" value="{{pwd}}" bindinput="pwdinput" pattern="[0-9]*" placeholder="请输入密码" />
-            </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" type="number" value="{{xh}}" bindinput="xhinput" pattern="[0-9]*" placeholder="请输入学号" />
+          </view>
+        </view>
+        <view class="weui-cell">
+          <view class="weui-cell__hd">
+            <label class="weui-label">密码</label>
+          </view>
+          <view class="weui-cell__bd">
+            <input class="weui-input" password type="text" value="{{pwd}}" bindinput="pwdinput" pattern="[0-9]*" placeholder="请输入密码" />
           </view>
         </view>
       </view>
     </view>
-    <view class="weui-form__tips-area">
-      <label for="weuiAgree" class="weui-agree">
-        <input id="weuiAgree" type="checkbox" class="weui-agree__checkbox" />
-        <span class="weui-agree__text">阅读并同意
-          <a bindtap="linkShow">《相关条款》</a>
-        </span>
-      </label>
-    </view>
-    <view class="weui-form__opr-area">
-      <button type="primary" bindtap="login">登录</button>
-    </view>
-    <view class="weui-form__extra-area">
-      <view class="weui-footer">
-        <view class="weui-footer__links">
-          <navigator bindtap="linkShow" class="weui-footer__link">底部链接文本</navigator>
-        </view>
-        <view class="weui-footer__text">Copyright © 2020 lwh.kim. All Rights Reserved.</view>
+  </view>
+  <view class="weui-form__opr-area" style="padding-top:15px;">
+    <button type="primary" bindtap="login">登录</button>
+  </view>
+  <view class="weui-form__extra-area page__fd">
+    <view class="weui-footer">
+      <view class="weui-footer__links">
+        <navigator bindtap="linkShow" class="weui-footer__link">关于作者</navigator>
       </view>
+      <view class="weui-footer__text">Copyright © 2020 lwh.kim. All Rights Reserved.</view>
     </view>
   </view>
 </view>

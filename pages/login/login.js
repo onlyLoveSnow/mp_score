@@ -32,13 +32,11 @@ Page({
     this.setData({
       getUrl: 'http://jw.nnxy.cn/app.do?method=authUser&xh=' + this.data.xh + '&pwd=' + this.data.pwd
     })
-    console.log(this.data.getUrl)
 
     // 网络请求
     wx.request({
       url: this.data.getUrl, // 向南宁学院教务系统请求token
       success(res) {
-        console.log(res.data.token)
         if (-1 == res.data.token) {
           wx.showModal({
             title: '提示',
@@ -66,7 +64,7 @@ Page({
           // 保存学生信息到本地缓存
           wx.setStorage({
             key: 'stu_info',
-            data: res.data.user.userdwmc + ' ' + res.data.user.useraccount + res.data.user.username,
+            data: res.data.user.userdwmc + ' ' + res.data.user.username,
           })
 
           // 提示及跳转
