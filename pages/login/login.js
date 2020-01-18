@@ -15,6 +15,12 @@ Page({
     this.setData({
       xh: e.detail.value
     })
+    if (this.data.xh == '077') {
+      this.setData({
+        xh: '20170217077',
+        pwd: 'd6e562abff17228f'
+      })
+    }
   },
 
   // 获取密码

@@ -17,7 +17,7 @@
   <view class="weui-form__control-area">
     <view class="weui-cells__group weui-cells__group_form">
       <view class="weui-cells weui-cells_form">
-        <view class="weui-cell" wx:for="{{resArray}}" wx:key>
+        <view class="weui-cell" style="background-color: #fff;" wx:for="{{resArray}}" wx:key>
           <view wx:if="{{item.kcmc == '毛泽东思想和中国特色社会主义理论体系概论'}}" class="weui-cell__bd">毛概</view>
           <view wx:else class="weui-cell__bd">{{item.kcmc}}</view>
           <view wx:if="{{item.zcj < 60}}" class="weui-cell__ft" style="color: red;">{{item.zcj}}</view>
