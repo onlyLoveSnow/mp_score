@@ -6,18 +6,18 @@
         <!-- <view class="picker" style="font-size: 16px;">
           {{semester[index]}}
         </view> -->
-          <button class="weui-btn" style="background-color: #ededed;" type="default">{{semester[index]}}</button>
+          <button class="weui-btn" style="background-color: #fff;" type="default">{{semester[index]}}</button>
         
       </picker>
     </view>
     <view class="weui-loadmore weui-loadmore_line">
-      <view class="weui-loadmore__tips weui-loadmore__tips_in-line" style="background-color: #ededed;">{{stu_info}}</view>
+      <view class="weui-loadmore__tips weui-loadmore__tips_in-line">{{stu_info}}</view>
     </view>
   </view>
   <view class="weui-form__control-area">
     <view class="weui-cells__group weui-cells__group_form">
       <view class="weui-cells weui-cells_form">
-        <view class="weui-cell" style="background-color: #ededed;" wx:for="{{resArray}}" wx:key>
+        <view class="weui-cell" wx:for="{{resArray}}" wx:key>
           <view wx:if="{{item.kcmc == '毛泽东思想和中国特色社会主义理论体系概论'}}" class="weui-cell__bd">毛概</view>
           <view wx:else class="weui-cell__bd">{{item.kcmc}}</view>
           <view wx:if="{{item.zcj < 60}}" class="weui-cell__ft" style="color: red;">{{item.zcj}}</view>

@@ -1,5 +1,7 @@
 /* pages/grade/grade.wxss */
-
+.page {
+  background-color: #fff;
+}
 
 .section {
   text-align: center;
