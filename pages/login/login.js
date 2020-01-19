@@ -49,6 +49,9 @@ Page({
         })
       }
     } else {
+      wx.showLoading({
+        title: '登录中',
+      })
 
       var _this = this
 
@@ -95,6 +98,9 @@ Page({
               },
               success(response) {
                 app.globalData.stu_info = JSON.parse(response.result)
+
+                // 关闭loading提示框
+                wx.hideLoading()
 
                 // 提示及跳转
                 wx.redirectTo({
