@@ -3,15 +3,12 @@
   <view>
     <view class="section">
       <picker bindchange="sectionSemester" value="{{index}}" range="{{semester}}">
-        <!-- <view class="picker" style="font-size: 16px;">
-          {{semester[index]}}
-        </view> -->
-          <button class="weui-btn" style="background-color: #fff;" type="default">{{semester[index]}}</button>
-        
+        <button class="weui-btn" style="background-color: #fff;" type="default">{{semester[index]}}</button>
+
       </picker>
     </view>
     <view class="weui-loadmore weui-loadmore_line">
-      <view class="weui-loadmore__tips weui-loadmore__tips_in-line">{{stu_info}}</view>
+      <view class="weui-loadmore__tips weui-loadmore__tips_in-line" bindtap="showStuInfo">{{stu_info.bj}} {{stu_info.xm}}</view>
     </view>
   </view>
   <view class="weui-form__control-area">
@@ -22,6 +19,24 @@
           <view wx:else class="weui-cell__bd">{{item.kcmc}}</view>
           <view wx:if="{{item.zcj < 60}}" class="weui-cell__ft" style="color: red;">{{item.zcj}}</view>
           <view wx:else class="weui-cell__ft">{{item.zcj}}</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <view class="weui-demo-dialog {{showDialog ? 'weui-demo-dialog_show' : ''}}">
+    <view class="weui-mask" bindtap="closeDialog"></view>
+    <view class="weui-dialog__wrp" bindtap="closeDialog">
+      <view class="weui-dialog">
+        <view class="weui-dialog__hd">
+          <view class="weui-dialog__title">学生信息</view>
+        </view>
+        <view class="weui-dialog__bd" style="text-align: left;">
+          <view>学院：{{stu_info.yxmc}}</view>
+          <view>专业：{{stu_info.zymc}}</view>
+          <view>班级：{{stu_info.bj}}</view>
+          <view>学号：{{stu_info.xh}}</view>
+          <view>姓名：{{stu_info.xm}}</view>
+          <view>当前学期考了{{total}}科 {{fail ? '不合格' + fail + '科' : ''}}</view>
         </view>
       </view>
     </view>

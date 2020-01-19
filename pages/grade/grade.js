@@ -1,18 +1,21 @@
 // pages/grade/grade.js
+var app = getApp()
+
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    getUrl: '', // 请求URL
-    token: '', // 请求令牌
-    xh: '', // 请求学号
-    stu_info: '',// 学生信息
+    stu_info: app.globalData.stu_info, // 学生信息
     resArray: [], // 请求到的成绩信息
 
-    semester: ['2019-2020-1', '2018-2019-2', '2018-2019-1', '2017-2018-2', '2017-2018-1'],  // 学期信息
-    index: 0
+    semester: ['2019-2020-1', '2018-2019-2', '2018-2019-1', '2017-2018-2', '2017-2018-1'], // 学期信息
+    index: 0,
+
+    total: 0,
+    fail: 0,
+    showDialog: false
   },
 
   // 选择学期
@@ -22,23 +25,48 @@ Page({
     })
 
     // 改变请求URL中的学期
-    this.setData({
-      getUrl: 'http://jw.nnxy.cn/app.do?method=getCjcx&xh=' + this.data.xh + '&xnxqid=' + this.data.semester[this.data.index]
-    })
+    let getUrl = 'http://jw.nnxy.cn/app.do?method=getCjcx&xh=' + app.globalData.xh + '&xnxqid=' + this.data.semester[this.data.index]
 
     var _this = this
-    // 重新请求
-    wx.request({
-      url: _this.data.getUrl, // 获取成绩请求
-      method: 'get',
-      header: {
-        'token': _this.data.token // 登录令牌
+    // 网络请求
+    wx.cloud.callFunction({
+      name: 'nnxy_score',
+      data: {
+        getUrl: getUrl,
+        token: app.globalData.token
       },
-      success(res) {
+      success(response) {
         _this.setData({
-          resArray: res.data.result
+          resArray: JSON.parse(response.result).result
         })
       }
+    })
+  },
+
+  showStuInfo() {
+    var total = 0
+    var fail = 0
+
+    for (var item of this.data.resArray) {
+      total++
+      if (item.zcj < 60) {
+        fail++
+      }
+    }
+
+    this.setData({
+      total: total,
+      fail: fail
+    })
+
+    this.setData({
+      showDialog: true
+    })
+  },
+
+  closeDialog: function() {
+    this.setData({
+      showDialog: false
     })
   },
 
@@ -48,34 +76,24 @@ Page({
   onLoad: function(options) {
     var _this = this
 
-    // 获取登录令牌
-    _this.setData({
-      token: wx.getStorageSync('token')
-    })
-
-    // 获取登录学号
-    _this.setData({
-      xh: wx.getStorageSync('xh')
-    })
-
     // 获取学生信息
     _this.setData({
-      stu_info: wx.getStorageSync('stu_info')
+      stu_info: app.globalData.stu_info
     })
 
-    _this.setData({
-      getUrl: 'http://jw.nnxy.cn/app.do?method=getCjcx&xh=' + _this.data.xh + '&xnxqid=' + _this.data.semester[_this.data.index]
-    })
+    // 拼接请求URL
+    let getUrl = 'http://jw.nnxy.cn/app.do?method=getCjcx&xh=' + app.globalData.xh + '&xnxqid=' + _this.data.semester[_this.data.index]
 
     // 网络请求
-    wx.request({
-      url: _this.data.getUrl, // 获取成绩请求
-      header: {
-        'token': _this.data.token // 登录令牌
+    wx.cloud.callFunction({
+      name: 'nnxy_score',
+      data: {
+        getUrl: getUrl,
+        token: app.globalData.token
       },
-      success(res) {
+      success(response) {
         _this.setData({
-          resArray: res.data.result
+          resArray: JSON.parse(response.result).result
         })
       }
     })

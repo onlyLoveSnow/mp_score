@@ -1,4 +1,6 @@
 // pages/login/login.js
+var app = getApp()
+
 Page({
 
   /**
@@ -6,8 +8,7 @@ Page({
    */
   data: {
     xh: '',
-    pwd: '',
-    getUrl: ''
+    pwd: ''
   },
 
   // 获取学号
@@ -20,6 +21,7 @@ Page({
         xh: '20170217077',
         pwd: 'd6e562abff17228f'
       })
+      wx.hideKeyboard()
     }
   },
 
@@ -49,15 +51,24 @@ Page({
     } else {
 
       var _this = this
-      this.setData({
-        getUrl: 'http://jw.nnxy.cn/app.do?method=authUser&xh=' + this.data.xh + '&pwd=' + this.data.pwd
-      })
 
-      // 网络请求
-      wx.request({
-        url: this.data.getUrl, // 向南宁学院教务系统请求token
-        success(res) {
-          if (-1 == res.data.token) {
+      let getUrl = 'http://jw.nnxy.cn/app.do?method=authUser&xh=' + this.data.xh + '&pwd=' + this.data.pwd
+
+      /**
+       * 云函数
+       */
+      wx.cloud.init({})
+
+      wx.cloud.callFunction({
+        name: 'nnxy_score',
+        data: {
+          getUrl: getUrl
+        },
+        success(response) {
+          let res = JSON.parse(response.result)
+          console.log(res.token)
+
+          if (-1 == res.token) {
             wx.showModal({
               title: '提示',
               content: '登录失败，请检查学号和密码',
@@ -69,30 +80,32 @@ Page({
               }
             })
           } else {
-            // 获取token和保存本地缓存
-            wx.setStorage({
-              key: "token",
-              data: res.data.token
-            })
-            // 保存学号到本地缓存
-            wx.setStorage({
-              key: "xh",
-              data: _this.data.xh
-            })
-            // 保存学生信息到本地缓存
-            wx.setStorage({
-              key: 'stu_info',
-              data: res.data.user.userdwmc + ' ' + res.data.user.username,
-            })
+            // 保存token到全局变量
+            app.globalData.token = res.token
+            // 保存学号到全局变量
+            app.globalData.xh = _this.data.xh
 
-            // 提示及跳转
-            wx.redirectTo({
-              url: '../grade/grade',
-            })
-            wx.showToast({
-              title: '登录成功',
-              icon: 'success',
-              duration: 2000
+            // 获取学生信息并保存到全局变量
+            getUrl = 'http://jw.nnxy.cn/app.do?method=getUserInfo&xh=' + _this.data.xh
+            wx.cloud.callFunction({
+              name: 'nnxy_score',
+              data: {
+                getUrl: getUrl,
+                token: res.token
+              },
+              success(response) {
+                app.globalData.stu_info = JSON.parse(response.result)
+
+                // 提示及跳转
+                wx.redirectTo({
+                  url: '../grade/grade',
+                })
+                wx.showToast({
+                  title: '登录成功',
+                  icon: 'success',
+                  duration: 2000
+                })
+              }
             })
           }
         }

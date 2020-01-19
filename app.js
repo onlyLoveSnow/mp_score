@@ -4,6 +4,8 @@ App({
 
   },
   globalData: {
-    userInfo: null
+    xh: '',
+    token: '',
+    stu_info: ''
   }
 })
