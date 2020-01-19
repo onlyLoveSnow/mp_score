@@ -36,8 +36,8 @@
           <view class="weui-dialog__title">联系方式</view>
         </view>
         <view class="weui-dialog__bd">
-          <view>作者：一叶相思</view>
-          <view>QQ:1094464365</view>
+          <view bindtap="copyQQ">作者：一叶相思</view>
+          <view bindtap="copyQQ">QQ:1094464365</view>
         </view>
         <view class="weui-dialog__ft">
           <view class="weui-dialog__btn" bindtap="closeDialog">确定</view>

@@ -22,6 +22,19 @@ Page({
     })
   },
 
+  copyQQ() {
+    wx.setClipboardData({
+      data: '1094464365',
+      success(res) {
+        // wx.hideToast()
+        wx.showToast({
+          title: 'QQ号已复制',
+          icon: 'none'
+        })
+      }
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
