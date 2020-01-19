@@ -15,7 +15,7 @@
             <label class="weui-label">学号</label>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" type="number" value="{{xh}}" bindinput="xhinput" pattern="[0-9]*" placeholder="请输入学号" />
+            <input class="weui-input" type="number" value="{{xh}}" bindinput="xhinput" pattern="[0-9]*" placeholder="请输入学号" adjust-position="true" />
           </view>
         </view>
         <view class="weui-cell">
@@ -23,7 +23,7 @@
             <label class="weui-label">密码</label>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" password type="text" value="{{pwd}}" bindinput="pwdinput" pattern="[0-9]*" placeholder="请输入密码" />
+            <input class="weui-input" password type="text" value="{{pwd}}" bindinput="pwdinput" pattern="[0-9]*" placeholder="请输入密码" adjust-positio1n="rue" bindconfirm="pwdConfirm" />
           </view>
         </view>
       </view>

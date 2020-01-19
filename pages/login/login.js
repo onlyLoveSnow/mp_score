@@ -34,7 +34,49 @@ Page({
 
   // 登录
   login: function() {
-    if (this.data.xh == '' || this.data.pwd == '') {
+    if (app.globalData.token != '') {
+      if (this.data.xh != '') {
+        wx.showLoading({
+          title: '登录中',
+        })
+
+        let getUrl = 'http://jw.nnxy.cn/app.do?method=getUserInfo&xh=' + this.data.xh
+        wx.cloud.callFunction({
+          name: 'nnxy_score',
+          data: {
+            getUrl: getUrl,
+            token: app.globalData.token
+          },
+          success(response) {
+            if (response.result != "{}") {
+              app.globalData.stu_info = JSON.parse(response.result)
+
+              // 关闭loading提示框
+              wx.hideLoading()
+
+              // 提示及跳转
+              wx.redirectTo({
+                url: '../grade/grade',
+              })
+              wx.showToast({
+                title: '登录成功',
+                icon: 'success',
+                duration: 2000
+              })
+            } else {
+              // 关闭loading提示框
+              wx.hideLoading()
+
+              wx.showModal({
+                title: '提示',
+                content: '请输入学号无法登录，请检查',
+                showCancel: false
+              })
+            }
+          }
+        })
+      }
+    } else if (this.data.xh == '' || this.data.pwd == '') {
       if (this.data.xh == '') {
         wx.showModal({
           title: '提示',
@@ -69,7 +111,6 @@ Page({
         },
         success(response) {
           let res = JSON.parse(response.result)
-          console.log(res.token)
 
           if (-1 == res.token) {
             wx.showModal({
@@ -119,6 +160,10 @@ Page({
     }
   },
 
+  pwdConfirm() {
+    this.login()
+  },
+
   about_msg() {
     wx.navigateTo({
       url: '../about_msg/about_msg',
@@ -143,7 +188,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
-
+    if (app.globalData.token != '') {
+      this.setData({
+        xh: '20170217'
+      })
+    }
   },
 
   /**
