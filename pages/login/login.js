@@ -49,7 +49,7 @@ Page({
 
     app.globalData.xh = ''
     app.globalData.token = ''
-    stu_info = ''
+    app.globalData.stu_info = ''
   },
 
   // 登录
@@ -57,7 +57,7 @@ Page({
     if (app.globalData.token != '') {
       if (this.data.xh != '') {
         wx.showLoading({
-          title: '登录中',
+          title: '加载中',
         })
 
         app.globalData.xh = this.data.xh
@@ -77,9 +77,16 @@ Page({
               wx.hideLoading()
 
               // 提示及跳转
-              wx.redirectTo({
+              wx.navigateTo({
                 url: '../grade/grade',
+                success() {
+                  _this.setData({
+                    pwd: '',
+                    pwdPla: '当前可免密查询任意学号成绩'
+                  })
+                }
               })
+              
               wx.showToast({
                 title: '登录成功',
                 icon: 'success',
@@ -114,7 +121,7 @@ Page({
       }
     } else {
       wx.showLoading({
-        title: '登录中',
+        title: '加载中',
       })
 
       var _this = this
@@ -168,10 +175,17 @@ Page({
                 // 关闭loading提示框
                 wx.hideLoading()
 
-                // 提示及跳转
-                wx.redirectTo({
+                // 提示及跳转                
+                wx.navigateTo({
                   url: '../grade/grade',
+                  success() {
+                    _this.setData({
+                      pwd: '',
+                      pwdPla: '当前可免密查询任意学号成绩'
+                    })
+                  }
                 })
+
                 wx.showToast({
                   title: '登录成功',
                   icon: 'success',
@@ -180,6 +194,20 @@ Page({
               }
             })
           }
+        },
+        fail(res) {
+          wx.hideLoading()
+
+          wx.showModal({
+            title: '提示',
+            content: '登录失败，请检查输入的教务系统网址是否正确',
+            showCancel: false,
+            success(res) {
+              _this.setData({
+                showHSDialog: true
+              })
+            }
+          })
         }
       })
     }
@@ -217,11 +245,9 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-    if (app.globalData.xh == '' || app.globalData.token == '' || app.globalData.stu_info == '') {
-      this.setData({
-        showTips: true
-      })
-    }
+    this.setData({
+      showTips: true
+    })
   },
 
   /**
@@ -238,18 +264,6 @@ Page({
     wx.pageScrollTo({
       scrollTop: 160,
       duration: 500
-    })
-
-    if (app.globalData.token != '') {
-      this.setData({
-        // xh: '20170217',
-        xh: app.globalData.xh,
-        pwdPla: '当前可免密查询任意学号成绩'
-      })
-    }
-
-    this.setData({
-      jwUrl: app.globalData.jwUrl
     })
   },
 
