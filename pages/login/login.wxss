@@ -2,3 +2,36 @@
 page {
   background-color: #fff;
 }
+
+.jwUrl {
+  margin-top: 30px;
+  margin-right: 15px;
+  padding-bottom: 120rpx;
+  text-align: right;
+}
+
+.page__hd {  
+  padding-bottom: 50rpx;
+}
+
+.page__fd {
+  padding-top: 80rpx;
+}
+
+.weui-demo-dialog{
+  visibility:hidden;
+  opacity:0;
+  transition:all .3s;
+}
+.weui-half-screen-dialog{
+  transition:all .3s;
+  transform:translateY(100%);
+}
+.weui-demo-dialog_show{
+  visibility:visible;
+  opacity:1;
+}
+.weui-demo-dialog_show .weui-half-screen-dialog{
+    transform:translateY(0);
+}
+

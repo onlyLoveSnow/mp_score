@@ -7,6 +7,9 @@ Page({
    * 页面的初始数据
    */
   data: {
+    jwUrl: app.globalData.jwUrl,
+    showHSDialog: false,
+    showTips: false,
     xh: '',
     pwd: '',
     pwdPla: '请输入密码'
@@ -17,13 +20,6 @@ Page({
     this.setData({
       xh: e.detail.value
     })
-    if (this.data.xh == '077') {
-      this.setData({
-        xh: '20170217077',
-        pwd: 'd6e562abff17228f'
-      })
-      wx.hideKeyboard()
-    }
   },
 
   // 获取密码
@@ -31,6 +27,29 @@ Page({
     this.setData({
       pwd: e.detail.value
     })
+  },
+
+  // 网址改变
+  jwUrlInput: function(e) {
+    this.setData({
+      jwUrl: e.detail.value
+    })
+  },
+
+  // 网址确定
+  changeUrl() {
+    app.globalData.jwUrl = this.data.jwUrl
+
+    this.setData({
+      showHSDialog: false,
+      xh: '',
+      pwd: '',
+      pwdPla: '请输入密码'
+    })
+
+    app.globalData.xh = ''
+    app.globalData.token = ''
+    stu_info = ''
   },
 
   // 登录
@@ -116,6 +135,9 @@ Page({
           let res = JSON.parse(response.result)
 
           if (-1 == res.token) {
+            // 关闭loading提示框
+            wx.hideLoading()
+
             wx.showModal({
               title: '提示',
               content: '登录失败，请检查学号和密码',
@@ -173,11 +195,33 @@ Page({
     })
   },
 
+  openHSDialog: function() {
+    this.setData({
+      showHSDialog: true
+    })
+  },
+
+  closeHSDialog: function() {
+    this.setData({
+      showHSDialog: false
+    })
+  },
+
+  closeTips: function() {
+    this.setData({
+      showTips: false
+    })
+  },
+
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function(options) {
-
+    if (app.globalData.xh == '' || app.globalData.token == '' || app.globalData.stu_info == '') {
+      this.setData({
+        showTips: true
+      })
+    }
   },
 
   /**
@@ -191,6 +235,11 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function() {
+    wx.pageScrollTo({
+      scrollTop: 160,
+      duration: 500
+    })
+
     if (app.globalData.token != '') {
       this.setData({
         // xh: '20170217',
@@ -198,6 +247,10 @@ Page({
         pwdPla: '当前可免密查询任意学号成绩'
       })
     }
+
+    this.setData({
+      jwUrl: app.globalData.jwUrl
+    })
   },
 
   /**

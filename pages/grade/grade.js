@@ -25,7 +25,7 @@ Page({
     })
 
     // 改变请求URL中的学期
-    let getUrl = 'http://jw.nnxy.cn/app.do?method=getCjcx&xh=' + app.globalData.xh + '&xnxqid=' + this.data.semester[this.data.index]
+    let getUrl = app.globalData.jwUrl + '/app.do?method=getCjcx&xh=' + app.globalData.xh + '&xnxqid=' + this.data.semester[this.data.index]
 
     var _this = this
     // 网络请求
@@ -82,7 +82,7 @@ Page({
     })
 
     // 拼接请求URL
-    let getUrl = 'http://jw.nnxy.cn/app.do?method=getCjcx&xh=' + app.globalData.xh + '&xnxqid=' + _this.data.semester[_this.data.index]
+    let getUrl = app.globalData.jwUrl + '/app.do?method=getCjcx&xh=' + app.globalData.xh + '&xnxqid=' + _this.data.semester[_this.data.index]
 
     // 网络请求
     wx.cloud.callFunction({

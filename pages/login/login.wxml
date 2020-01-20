@@ -1,9 +1,13 @@
 <!--pages/login/login.wxml-->
 <view class="page">
+  <view class="jwUrl">
+    <image mode="aspectFit" style="width: 70rpx; height: 70rpx;" bindtap="openHSDialog"></image>
+  </view>
+
   <view class="page__hd">
-    <view class="weui-form__text-area">
-      <view class="weui-form__title">南宁学院成绩查询</view>
-      <view class="weui-form__desc">请输入学号密码</view>
+    <view class="weui-form__text-area" bindtap="openHSDialog">
+      <view class="weui-form__title">强智教务系统成绩查询</view>
+      <view class="weui-form__desc">点击可更换学校</view>
     </view>
   </view>
   <view class="weui-form__control-area">
@@ -38,6 +42,49 @@
         <navigator bindtap="about_msg" class="weui-footer__link">联系作者</navigator>
       </view>
       <view class="weui-footer__text">Copyright © 2020 lwh.kim. All Rights Reserved.</view>
+    </view>
+  </view>
+
+  <view class="weui-demo-dialog {{showHSDialog ? 'weui-demo-dialog_show' : ''}}">
+    <view class="weui-mask" bindtap="closeHSDialog"></view>
+    <view class="weui-half-screen-dialog">
+      <view class="weui-half-screen-dialog__hd">
+        <view class="weui-half-screen-dialog__hd__side">
+          <view bindtap="closeHSDialog" class="weui-icon-btn weui-icon-btn_close">关闭</view>
+        </view>
+        <view class="weui-half-screen-dialog__hd__main">
+          <text class="weui-half-screen-dialog__title">请输入学校教务系统网址</text>
+          <text class="weui-half-screen-dialog__subtitle">需要输入http:// 或 https://</text>
+        </view>
+      </view>
+      <view class="weui-half-screen-dialog__bd">
+        <view class="weui-half-screen-dialog__desc">
+          <input placeholder="{{jwUrl}}" bindinput="jwUrlInput" />
+        </view>
+        <view class="weui-half-screen-dialog__tips">
+          请参照格式填写，否则可能请求不到数据
+        </view>
+      </view>
+      <view class="weui-half-screen-dialog__ft">
+        <button type="primary" class="weui-btn" bindtap="changeUrl">确定</button>
+      </view>
+    </view>
+  </view>
+  <view class="weui-demo-dialog {{showTips ? 'weui-demo-dialog_show' : ''}}">
+    <view class="weui-mask" bindtap="closeTips"></view>
+    <view class="weui-dialog__wrp" bindtap="closeTips">
+      <view class="weui-dialog">
+        <view class="weui-dialog__hd">
+          <view class="weui-dialog__title">使用提示</view>
+        </view>
+        <view class="weui-dialog__bd" style="text-align: left;">
+          <view>1、免责声明，本软件查询过程不使用后端服务器，仅使用云函数功能用于规避小程序的HTTPS请求，成绩皆从教务系统直接获取，查询到的一切数据开发者都不保留</view>
+          <view>2、本软件用于强智系教务系统成绩查询，根据页面提示可修改自己教务系统网址，默认是我的学校哈哈</view>
+          <view>3、登录成功后，返回登录页面可不输入密码查询任意学号成绩（不要做坏事，不要用作商业用途）</view>
+          <view>4、成绩列表页面点击上方时间段可修改查询学期</view>
+          <view>5、我提倡开源，若为自由故</view>
+        </view>
+      </view>
     </view>
   </view>
 </view>

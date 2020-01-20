@@ -4,7 +4,7 @@ App({
 
   },
   globalData: {
-    jwUrl: 'http://jw.nnxy.cn',
+    jwUrl: 'http://jw.nnxy.cn/',
     xh: '',
     token: '',
     stu_info: ''

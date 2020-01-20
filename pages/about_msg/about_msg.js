@@ -24,14 +24,7 @@ Page({
 
   copyQQ() {
     wx.setClipboardData({
-      data: '1094464365',
-      success(res) {
-        wx.hideToast()
-        wx.showToast({
-          title: 'QQ号已复制',
-          icon: 'none'
-        })
-      }
+      data: '1094464365'
     })
   },
 
