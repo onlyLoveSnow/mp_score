@@ -26,7 +26,7 @@ Page({
     wx.setClipboardData({
       data: '1094464365',
       success(res) {
-        // wx.hideToast()
+        wx.hideToast()
         wx.showToast({
           title: 'QQ号已复制',
           icon: 'none'

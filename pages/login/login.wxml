@@ -23,7 +23,7 @@
             <label class="weui-label">密码</label>
           </view>
           <view class="weui-cell__bd">
-            <input class="weui-input" password type="text" value="{{pwd}}" bindinput="pwdinput" pattern="[0-9]*" placeholder="请输入密码" adjust-positio1n="rue" bindconfirm="pwdConfirm" />
+            <input class="weui-input" password type="text" value="{{pwd}}" bindinput="pwdinput" pattern="[0-9]*" placeholder="{{pwdPla}}" adjust-positio1n="rue" bindconfirm="pwdConfirm" />
           </view>
         </view>
       </view>

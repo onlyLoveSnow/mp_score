@@ -8,7 +8,8 @@ Page({
    */
   data: {
     xh: '',
-    pwd: ''
+    pwd: '',
+    pwdPla: '请输入密码'
   },
 
   // 获取学号
@@ -40,7 +41,9 @@ Page({
           title: '登录中',
         })
 
-        let getUrl = 'http://jw.nnxy.cn/app.do?method=getUserInfo&xh=' + this.data.xh
+        app.globalData.xh = this.data.xh
+
+        let getUrl = app.globalData.jwUrl + '/app.do?method=getUserInfo&xh=' + this.data.xh
         wx.cloud.callFunction({
           name: 'nnxy_score',
           data: {
@@ -97,7 +100,7 @@ Page({
 
       var _this = this
 
-      let getUrl = 'http://jw.nnxy.cn/app.do?method=authUser&xh=' + this.data.xh + '&pwd=' + this.data.pwd
+      let getUrl = app.globalData.jwUrl + '/app.do?method=authUser&xh=' + this.data.xh + '&pwd=' + this.data.pwd
 
       /**
        * 云函数
@@ -130,7 +133,7 @@ Page({
             app.globalData.xh = _this.data.xh
 
             // 获取学生信息并保存到全局变量
-            getUrl = 'http://jw.nnxy.cn/app.do?method=getUserInfo&xh=' + _this.data.xh
+            getUrl = app.globalData.jwUrl + '/app.do?method=getUserInfo&xh=' + _this.data.xh
             wx.cloud.callFunction({
               name: 'nnxy_score',
               data: {
@@ -190,7 +193,9 @@ Page({
   onShow: function() {
     if (app.globalData.token != '') {
       this.setData({
-        xh: '20170217'
+        // xh: '20170217',
+        xh: app.globalData.xh,
+        pwdPla: '当前可免密查询任意学号成绩'
       })
     }
   },
