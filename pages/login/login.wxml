@@ -1,90 +1,98 @@
 <!--pages/login/login.wxml-->
 <view class="page">
-  <view class="jwUrl">
-    <image mode="aspectFit" style="width: 70rpx; height: 70rpx;" bindtap="openHSDialog"></image>
-  </view>
+	<view class="page__hd">
+		<view class="weui-form__text-area">
+			<image src="/image/logo.png" mode="aspectFit"></image>
+			<view class="weui-form__title" bindtap="showTips">成绩查询</view>
+		</view>
+	</view>
 
-  <view class="page__hd">
-    <view class="weui-form__text-area" bindtap="openHSDialog">
-      <view class="weui-form__title">强智教务系统成绩查询</view>
-      <view class="weui-form__desc">点击可更换学校</view>
-    </view>
-  </view>
-  <view class="weui-form__control-area">
-    <view class="weui-cells__group weui-cells__group_form">
-      <view class="weui-cells__title">输入框</view>
-      <view class="weui-cells weui-cells_form">
-        <view class="weui-cell">
-          <view class="weui-cell__hd">
-            <label class="weui-label">学号</label>
-          </view>
-          <view class="weui-cell__bd">
-            <input class="weui-input" type="number" value="{{xh}}" bindinput="xhinput" pattern="[0-9]*" placeholder="请输入学号" adjust-position="true" />
-          </view>
-        </view>
-        <view class="weui-cell">
-          <view class="weui-cell__hd">
-            <label class="weui-label">密码</label>
-          </view>
-          <view class="weui-cell__bd">
-            <input class="weui-input" password type="text" value="{{pwd}}" bindinput="pwdinput" pattern="[0-9]*" placeholder="{{pwdPla}}" adjust-positio1n="rue" bindconfirm="pwdConfirm" />
-          </view>
-        </view>
-      </view>
-    </view>
-  </view>
-  <view class="weui-form__opr-area" style="padding-top:15px;">
-    <button type="primary" bindtap="login">登录</button>
-  </view>
-  <view class="weui-form__extra-area page__fd">
-    <view class="weui-footer">
-      <view class="weui-footer__links">
-        <navigator bindtap="about_msg" class="weui-footer__link">联系作者</navigator>
-      </view>
-      <view class="weui-footer__text">Copyright © 2020 lwh.kim. All Rights Reserved.</view>
-    </view>
-  </view>
+	<view class="weui-form__control-area">
+		<view class="weui-cells__group weui-cells__group_form">
+			<view class="weui-cells__title changeSchool-click">
+				<view bindtap="openHSDialog">🌈🔍</view>
+			</view>
+			<view class="weui-cells weui-cells_form">
+				<view class="weui-cell">
+					<view class="weui-cell__hd">
+						<label class="weui-label">学号</label>
+					</view>
+					<view class="weui-cell__bd">
+						<input class="weui-input" type="number" model:value="{{xh}}" bindinput="xhinput" pattern="[0-9]*" placeholder="请输入学号" adjust-position="true" />
+					</view>
+				</view>
+				<view class="weui-cell">
+					<view class="weui-cell__hd">
+						<label class="weui-label">密码</label>
+					</view>
+					<view class="weui-cell__bd">
+						<input class="weui-input" password type="text" disabled="{{pwdDisabled}}" model:value="{{pwd}}" pattern="[0-9]*" placeholder="{{pwdPla}}" adjust-positio1n="rue" bindconfirm="pwdConfirm" />
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
 
-  <view class="weui-demo-dialog {{showHSDialog ? 'weui-demo-dialog_show' : ''}}">
-    <view class="weui-mask" bindtap="closeHSDialog"></view>
-    <view class="weui-half-screen-dialog">
-      <view class="weui-half-screen-dialog__hd">
-        <view class="weui-half-screen-dialog__hd__side">
-          <view bindtap="closeHSDialog" class="weui-icon-btn weui-icon-btn_close">关闭</view>
-        </view>
-        <view class="weui-half-screen-dialog__hd__main">
-          <text class="weui-half-screen-dialog__title">请输入学校教务系统网址</text>
-          <text class="weui-half-screen-dialog__subtitle">需要输入http:// 或 https://</text>
-        </view>
-      </view>
-      <view class="weui-half-screen-dialog__bd">
-        <view class="weui-half-screen-dialog__desc">
-          <input placeholder="{{jwUrl}}" bindinput="jwUrlInput" />
-        </view>
-        <view class="weui-half-screen-dialog__tips">
-          请参照格式填写，否则可能请求不到数据
-        </view>
-      </view>
-      <view class="weui-half-screen-dialog__ft">
-        <button type="primary" class="weui-btn" bindtap="changeUrl">确定</button>
-      </view>
-    </view>
-  </view>
-  <view class="weui-demo-dialog {{showTips ? 'weui-demo-dialog_show' : ''}}">
-    <view class="weui-mask" bindtap="closeTips"></view>
-    <view class="weui-dialog__wrp" bindtap="closeTips">
-      <view class="weui-dialog">
-        <view class="weui-dialog__hd">
-          <view class="weui-dialog__title">使用提示</view>
-        </view>
-        <view class="weui-dialog__bd" style="text-align: left;">
-          <view>1、免责声明，本软件查询过程不使用后端服务器，仅使用云函数功能用于规避小程序的HTTPS请求，成绩皆从教务系统直接获取，查询到的一切数据开发者都不保留</view>
-          <view>2、本软件用于强智系教务系统成绩查询，根据页面提示可修改自己教务系统网址，默认是我的学校哈哈</view>
-          <view>3、登录成功后，返回登录页面可不输入密码查询任意学号成绩（不要做坏事，不要用作商业用途）</view>
-          <view>4、成绩列表页面点击上方时间段可修改查询学期</view>
-          <view>5、我提倡开源，若为自由故</view>
-        </view>
-      </view>
-    </view>
-  </view>
+	<view class="weui-form__opr-area" style="padding-top:8px;">
+		<button class="btn my-btn" bindtap="login">登 录</button>
+	</view>
+
+	<view class="weui-form__extra-area fixed-bottom">
+		<view class="weui-footer">
+			<view class="weui-footer__links">
+				<a class="weui-footer__link" bindtap="toAbout">关于小程序</a>
+			</view>
+			<view class="weui-footer__text">Copyright © 2017-2020 黎大业</view>
+		</view>
+	</view>
+
+	<!-- 教务系统更改弹窗 -->
+	<view class="fadeIn" wx:if="{{showHSDialog}}">
+		<view class="weui-mask" bindtap="closeHSDialog"></view>
+		<view class="weui-half-screen-dialog">
+			<view class="weui-half-screen-dialog__hd">
+				<view class="weui-half-screen-dialog__hd__side" bindtap="close">
+					<view bindtap="closeHSDialog" class="weui-icon-btn weui-icon-btn_close">关闭</view>
+				</view>
+				<view class="weui-half-screen-dialog__hd__main">
+					<text class="weui-half-screen-dialog__title">请输入学校教务系统网址</text>
+					<text class="weui-half-screen-dialog__subtitle">需要输入http:// 或 https://</text>
+				</view>
+				<view class="weui-half-screen-dialog__hd__side">
+					<a class="weui-icon-btn">更多<i class="weui-icon-more"></i></a>
+				</view>
+			</view>
+			<view class="weui-half-screen-dialog__bd">
+				<view class="weui-half-screen-dialog__desc">
+					<input placeholder="{{jwUrl}}" model:value="{{jwUrlTemp}}" />
+				</view>
+				<view class="weui-half-screen-dialog__tips">
+					请参照格式填写，否则可能请求不到数据
+				</view>
+			</view>
+			<view class="weui-half-screen-dialog__ft">
+				<button type="primary" class="weui-btn" bindtap="changeUrl">确定</button>
+			</view>
+		</view>
+	</view>
+
+	<!-- 软件说明模态框 -->
+	<view class="fadeIn" wx:if="{{showTips}}" bindtap="closeTips">
+		<view class="weui-mask"></view>
+		<view class="weui-dialog__wrp">
+			<view class="weui-dialog">
+				<view class="weui-dialog__hd">
+					<view class="weui-dialog__title">使用提示📋</view>
+				</view>
+				<view class="weui-dialog__bd" style="text-align: left;">
+					<view>1、南瓜罐头（化名🎃）小程序用于在校考试成绩查询🔍，使用教务系统账号密码登录</view>
+					<view>2、查询过程不使用任何形式的后端程序，成绩等信息通过教务系统提供的API直接获取，过程产生的数据开发者（下称“我们🧑”）无法获取</view>
+					<view>3、登录成功后✅，返回登录页面可不输入密码查询任意学号成绩</view>
+					<view>4、也可用于其他同样使用强智系统的学校，点击输入框左上角小图标🌈🔍，按规范输入学校教务系统网址即可，默认是我的学校 哈哈😄</view>
+					<view>5、在成绩页面点击页面上方时间段可修改查询学期🎈</view>
+					<view>6、您必须充分了解使用该小程序的用途和风险。十分必要时，我们所承担的责任仅限于小程序的升级❤💕</view>
+				</view>
+			</view>
+		</view>
+	</view>
 </view>

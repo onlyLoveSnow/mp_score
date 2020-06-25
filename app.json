@@ -2,9 +2,7 @@
   "pages": [
     "pages/login/login",
     "pages/grade/grade",
-    "pages/about_msg/about_msg",
-    "pages/temp/temp",
-    "pages/index/index"
+    "pages/about/about"
   ],
   "window": {
     "backgroundTextStyle": "light",

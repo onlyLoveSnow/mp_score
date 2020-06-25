@@ -1,43 +1,61 @@
 <!--pages/grade/grade.wxml-->
 <view class="page">
-  <view>
-    <view class="section">
-      <picker bindchange="sectionSemester" value="{{index}}" range="{{semester}}">
-        <button class="weui-btn" style="background-color: #fff;" type="default">{{semester[index]}}</button>
+	<view>
+		<!-- 选择学期 -->
+		<view class="section">
+			<button class="weui-btn my-btn" bindtap="changeSemester">{{semesterData[index]}}</button>
+		</view>
 
-      </picker>
-    </view>
-    <view class="weui-loadmore weui-loadmore_line">
-      <view class="weui-loadmore__tips weui-loadmore__tips_in-line" bindtap="showStuInfo">{{stu_info.bj}} {{stu_info.xm}}</view>
-    </view>
-  </view>
-  <view class="weui-form__control-area">
-    <view class="weui-cells__group weui-cells__group_form">
-      <view class="weui-cells weui-cells_form">
-        <view class="weui-cell" style="background-color: #fff;" wx:for="{{resArray}}" wx:key>
-          <view class="weui-cell__bd">{{item.kcmc}}</view>
-          <view wx:if="{{item.zcj < 60}}" class="weui-cell__ft" style="color: red;">{{item.zcj}}</view>
-          <view wx:else class="weui-cell__ft">{{item.zcj}}</view>
-        </view>
-      </view>
-    </view>
-  </view>
-  <view class="weui-demo-dialog {{showDialog ? 'weui-demo-dialog_show' : ''}}">
-    <view class="weui-mask" bindtap="closeDialog"></view>
-    <view class="weui-dialog__wrp" bindtap="closeDialog">
-      <view class="weui-dialog">
-        <view class="weui-dialog__hd">
-          <view class="weui-dialog__title">学生信息</view>
-        </view>
-        <view class="weui-dialog__bd" style="text-align: left;">
-          <view>学院：{{stu_info.yxmc}}</view>
-          <view>专业：{{stu_info.zymc}}</view>
-          <view>班级：{{stu_info.bj}}</view>
-          <view>学号：{{stu_info.xh}}</view>
-          <view>姓名：{{stu_info.xm}}</view>
-          <view>当前学期考了{{total}}科 {{fail ? '不合格' + fail + '科' : ''}}</view>
-        </view>
-      </view>
-    </view>
-  </view>
+		<!-- 学生信息 -->
+		<view class="weui-loadmore weui-loadmore_line">
+			<view class="weui-loadmore__tips weui-loadmore__tips_in-line" bindtap="showStuInfo">{{stu_info.bj}} {{stu_info.xm}}</view>
+		</view>
+	</view>
+
+	<!-- 成绩列表 -->
+	<view class="weui-form__control-area">
+		<view class="weui-cells__group weui-cells__group_form">
+			<view class="weui-cell" wx:for="{{gradeArray}}" wx:key="kcmc">
+				<view class="weui-cell__bd">{{item.kcmc}}</view>
+				<view wx:if="{{item.zcj < 60}}" class="weui-cell__ft" style="color: #F56C6C;">{{item.zcj}}</view>
+				<view wx:else class="weui-cell__ft" style="color: #909399;">{{item.zcj}}</view>
+			</view>
+		</view>
+	</view>
+
+	<!-- 学期选择 -->
+	<view wx:if="{{showSemester}}" class="fadeIn">
+		<view class="weui-mask" bindtap="closeSemester"></view>
+		<view class="weui-actionsheet weui-actionsheet_toggle">
+			<view class="weui-actionsheet__title">
+				<view class="weui-actionsheet__title-text">选择学期</view>
+			</view>
+			<view class="weui-actionsheet__menu">
+				<view class="weui-actionsheet__cell {{idx === index ? 'my-active-item' : ''}}" wx:for="{{semesterData}}" wx:for-index="idx" wx:key="item" bindtap="sectionSemester" data-index="{{idx}}">{{item}}</view>
+			</view>
+			<view class="weui-actionsheet__action">
+				<view class="weui-actionsheet__cell" bindtap="closeSemester">取消</view>
+			</view>
+		</view>
+	</view>
+
+	<!-- 学生信息弹窗 -->
+	<view class="fadeIn" wx:if="{{showDialog}}" bindtap="closeDialog">
+		<view class="weui-mask"></view>
+		<view class="weui-dialog__wrp">
+			<view class="weui-dialog">
+				<view class="weui-dialog__hd">
+					<view class="weui-dialog__title">考生信息</view>
+				</view>
+				<view class="weui-dialog__bd" style="text-align: left;">
+					<view>学院：{{stu_info.yxmc}}</view>
+					<view>专业：{{stu_info.zymc}}</view>
+					<view>班级：{{stu_info.bj}}</view>
+					<view>学号：{{stu_info.xh}}</view>
+					<view>姓名：{{stu_info.xm}}</view>
+					<view>当前学期考了{{total}}门课 {{fail ? '不合格' + fail + '门' : ''}}</view>
+				</view>
+			</view>
+		</view>
+	</view>
 </view>

@@ -11,14 +11,6 @@
   padding-top: 40rpx;
 }
 
-.grade-box {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-  margin: 30rpx 150rpx 30rpx 150rpx;
-}
-
 .weui-demo-dialog {
   visibility: hidden;
   opacity: 0;
@@ -30,6 +22,15 @@
   opacity: 1;
 }
 
-.show-stu-info {
-  
+.my-btn {
+  color: #1745a0;
+  background-color: #fff;
+}
+
+.my-active-item {
+  color: #1745a0;
+}
+
+.weui-form__control-area {
+  margin: 30px 0 10px 0;
 }
