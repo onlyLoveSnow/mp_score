@@ -10,11 +10,7 @@ page {
 }
 
 .page__hd {
-  padding-top: 60rpx;
-}
-
-.page__fd {
-  padding-top: 80rpx;
+  padding-top: 20rpx;
 }
 
 .changeSchool-click {

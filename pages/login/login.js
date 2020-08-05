@@ -14,12 +14,13 @@ Page({
     xh: '',
     pwd: '',
     pwdPla: '请输入密码',
-    pwdDisabled: false
+    pwdDisabled: false,
+    loginLabel: '登 录'
   },
 
   // 补全学号
   xhinput: function (e) {
-
+    
   },
 
   // 网址改变
@@ -61,11 +62,11 @@ Page({
 
         app.globalData.xh = this.data.xh
 
-        let getUrl = app.globalData.jwUrl + '/app.do?method=getUserInfo&xh=' + this.data.xh
+        let url = app.globalData.jwUrl + '/app.do?method=getUserInfo&xh=' + this.data.xh
         wx.cloud.callFunction({
-          name: 'nnxy_score',
+          name: 'nnxy_grade',
           data: {
-            getUrl: getUrl,
+            url: url,
             token: app.globalData.token
           },
           success(response) {
@@ -126,12 +127,12 @@ Page({
 
       var _this = this
 
-      let getUrl = app.globalData.jwUrl + '/app.do?method=authUser&xh=' + this.data.xh + '&pwd=' + this.data.pwd
+      let url = app.globalData.jwUrl + '/app.do?method=authUser&xh=' + this.data.xh + '&pwd=' + this.data.pwd
 
       wx.cloud.callFunction({
-        name: 'nnxy_score',
+        name: 'nnxy_grade',
         data: {
-          getUrl: getUrl
+          url: url
         },
         success(response) {
           let res = JSON.parse(response.result)
@@ -157,11 +158,11 @@ Page({
             app.globalData.xh = _this.data.xh
 
             // 获取学生信息并保存到全局变量
-            getUrl = app.globalData.jwUrl + '/app.do?method=getUserInfo&xh=' + _this.data.xh
+            url = app.globalData.jwUrl + '/app.do?method=getUserInfo&xh=' + _this.data.xh
             wx.cloud.callFunction({
-              name: 'nnxy_score',
+              name: 'nnxy_grade',
               data: {
-                getUrl: getUrl,
+                url: url,
                 token: res.token
               },
               success(response) {
@@ -177,7 +178,8 @@ Page({
                     _this.setData({
                       pwd: '',
                       pwdPla: '当前可免密查询任意学号成绩',
-                      pwdDisabled: true
+                      pwdDisabled: true,
+                      loginLabel: '查 询'
                     })
                   }
                 })

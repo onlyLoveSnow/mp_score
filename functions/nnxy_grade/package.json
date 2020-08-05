@@ -1,15 +1,15 @@
 {
-  "name": "nnxy_score",
+  "name": "nnxy_grade",
   "version": "1.0.0",
-  "description": "",
+  "description": "云函数使用got请求教务系统",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "黎伟航",
   "license": "ISC",
   "dependencies": {
-    "got": "^9.6.0",
+    "got": "^11.5.1",
     "wx-server-sdk": "latest"
   }
 }

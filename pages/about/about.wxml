@@ -28,22 +28,21 @@
 				<view class="weui-footer__links">
 					<a class="weui-footer__link" bindtap="showTel">联系方式</a>
 				</view>
-				<view class="weui-footer__text">Copyright © 2017-2020 黎大业</view>
+				<view class="weui-footer__text">Copyright © 2017-至今 黎大业</view>
 			</view>
 		</view>
 	</view>
 
-	<!-- 学生信息弹窗 -->
+	<!-- 联系方式弹窗 -->
 	<view class="fadeIn" wx:if="{{showDialog}}" bindtap="closeDialog">
 		<view class="weui-mask"></view>
 		<view class="weui-dialog__wrp">
-			<view class="weui-dialog">
+			<view class="weui-dialog" bindtap="copyQQ">
 				<view class="weui-dialog__hd">
 					<view class="weui-dialog__title">联系方式</view>
 				</view>
-				<view class="weui-dialog__bd" style="text-align: left;">
-					<view bindtap="copyQQ">无聊的猿: 黎大业</view>
-					<view bindtap="copyQQ">QQ: 1094464365（点击复制）</view>
+				<view class="weui-dialog__bd">
+					<view class="weui-dialog__title">QQ: 1094464365（点击复制）</view>
 				</view>
 			</view>
 		</view>

@@ -34,7 +34,7 @@
 	</view>
 
 	<view class="weui-form__opr-area" style="padding-top:8px;">
-		<button class="btn my-btn" bindtap="login">登 录</button>
+		<button class="btn my-btn" bindtap="login">{{loginLabel}}</button>
 	</view>
 
 	<view class="weui-form__extra-area fixed-bottom">
@@ -42,11 +42,11 @@
 			<view class="weui-footer__links">
 				<a class="weui-footer__link" bindtap="toAbout">关于小程序</a>
 			</view>
-			<view class="weui-footer__text">Copyright © 2017-2020 黎大业</view>
+			<view class="weui-footer__text">Copyright © 2017-至今 黎大业</view>
 		</view>
 	</view>
 
-	<!-- 教务系统更改弹窗 -->
+	<!-- 更改教务系统弹窗 -->
 	<view class="fadeIn" wx:if="{{showHSDialog}}">
 		<view class="weui-mask" bindtap="closeHSDialog"></view>
 		<view class="weui-half-screen-dialog">
@@ -56,10 +56,7 @@
 				</view>
 				<view class="weui-half-screen-dialog__hd__main">
 					<text class="weui-half-screen-dialog__title">请输入学校教务系统网址</text>
-					<text class="weui-half-screen-dialog__subtitle">需要输入http:// 或 https://</text>
-				</view>
-				<view class="weui-half-screen-dialog__hd__side">
-					<a class="weui-icon-btn">更多<i class="weui-icon-more"></i></a>
+					<text class="weui-half-screen-dialog__subtitle">需加上http:// 或 https://</text>
 				</view>
 			</view>
 			<view class="weui-half-screen-dialog__bd">
@@ -67,11 +64,11 @@
 					<input placeholder="{{jwUrl}}" model:value="{{jwUrlTemp}}" />
 				</view>
 				<view class="weui-half-screen-dialog__tips">
-					请参照格式填写，否则可能请求不到数据
+					需要参照格式填写，否则可能会请求不到数据
 				</view>
 			</view>
 			<view class="weui-half-screen-dialog__ft">
-				<button type="primary" class="weui-btn" bindtap="changeUrl">确定</button>
+				<button class="btn my-btn" bindtap="changeUrl">确定</button>
 			</view>
 		</view>
 	</view>
@@ -85,12 +82,12 @@
 					<view class="weui-dialog__title">使用提示📋</view>
 				</view>
 				<view class="weui-dialog__bd" style="text-align: left;">
-					<view>1、南瓜罐头（化名🎃）小程序用于在校考试成绩查询🔍，使用教务系统账号密码登录</view>
+					<view>1、南瓜罐头（化名🎃）小程序用于在校考试成绩查询🔍，请使用教务系统账号密码登录</view>
 					<view>2、查询过程不使用任何形式的后端程序，成绩等信息通过教务系统提供的API直接获取，过程产生的数据开发者（下称“我们🧑”）无法获取</view>
-					<view>3、登录成功后✅，返回登录页面可不输入密码查询任意学号成绩</view>
-					<view>4、也可用于其他同样使用强智系统的学校，点击输入框左上角小图标🌈🔍，按规范输入学校教务系统网址即可，默认是我的学校 哈哈😄</view>
-					<view>5、在成绩页面点击页面上方时间段可修改查询学期🎈</view>
-					<view>6、您必须充分了解使用该小程序的用途和风险。十分必要时，我们所承担的责任仅限于小程序的升级❤💕</view>
+					<view>3、登录成功后✅，返回登录页面可免密码查询任意学号成绩</view>
+					<view>4、可查询其他同样使用强智教务系统的学校，需点击输入框左上角小图标🌈🔍，按规范更换所在学校教务系统地址😄😄</view>
+					<view>5、在成绩页面中点击上方蓝色时间段可查看不同学期成绩🎈</view>
+					<view>6、您必须充分了解使用该小程序的用途和风险。十分必要时，我所承担的责任仅限于小程序的升级❤💕</view>
 				</view>
 			</view>
 		</view>

@@ -45,14 +45,14 @@ Page({
     let semester = this.data.semesterData[index].substring(0, 9) + '-' + this.data.semesterData[index].substring(13, 14);
 
     // 改变请求URL中的学期
-    let getUrl = app.globalData.jwUrl + '/app.do?method=getCjcx&xh=' + app.globalData.xh + '&xnxqid=' + semester
+    let url = app.globalData.jwUrl + '/app.do?method=getCjcx&xh=' + app.globalData.xh + '&xnxqid=' + semester
 
     var _this = this
     // 网络请求
     wx.cloud.callFunction({
-      name: 'nnxy_score',
+      name: 'nnxy_grade',
       data: {
-        getUrl: getUrl,
+        url: url,
         token: app.globalData.token
       },
       success(response) {
@@ -181,16 +181,16 @@ Page({
     // 格式化学期
     let semester = this.data.semesterData[this.data.index].substring(0, 9) + '-' + this.data.semesterData[this.data.index].substring(13, 14);
 
-    console.log(semester);
+    // console.log(semester);
 
     // 拼接请求URL
-    let getUrl = app.globalData.jwUrl + '/app.do?method=getCjcx&xh=' + app.globalData.xh + '&xnxqid=' + semester
+    let url = app.globalData.jwUrl + '/app.do?method=getCjcx&xh=' + app.globalData.xh + '&xnxqid=' + semester
 
     // 网络请求
     wx.cloud.callFunction({
-      name: 'nnxy_score',
+      name: 'nnxy_grade',
       data: {
-        getUrl: getUrl,
+        url: url,
         token: app.globalData.token
       },
       success(response) {
