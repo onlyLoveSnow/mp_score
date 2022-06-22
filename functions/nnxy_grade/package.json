@@ -9,7 +9,7 @@
   "author": "黎伟航",
   "license": "ISC",
   "dependencies": {
-    "got": "^11.5.1",
+    "got": "^11.8.5",
     "wx-server-sdk": "latest"
   }
 }
